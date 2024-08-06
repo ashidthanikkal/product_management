@@ -1,0 +1,52 @@
+<h2 class="text-center">All Products</h2>
+
+<div class=" d-flex justify-content-between flex-wrap gap-2">
+  <div class="filter-container">
+    <label for="categoryFilter">Filter by Category: </label>
+    <select class="px-2 py-1 rounded ms-2" id="categoryFilter" [(ngModel)]="selectedCategory" (change)="filterProducts()">
+      <option value="">All</option>
+      <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+    </select>
+  </div>
+  
+  <div>
+    <input [(ngModel)]="searchData" class="rounded px-2 py-1" placeholder="search product" type="text">
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Category</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th scope="col">Image</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of filteredProducts | search:searchData, let j = index">
+      <th scope="row">{{j + 1}}</th>
+      <td>{{product.name}}</td>
+      <td>{{product.brand}}</td>
+      <td>{{product.category}}</td>
+      <td>{{product.price}}</td>
+      <td>{{product.description}}</td>
+      <td>
+        <img width="50px" height="50px" [src]="product.image" alt="">
+      </td>
+      <td>
+        <a routerLink="/editproducts/{{product.id}}">
+          <i class="fa-solid fa-pen-to-square fa-lg" style="color: #000000;"></i>
+        </a>
+      </td>
+      <td>
+        <i (click)="deleteProducts(product.id)" class="fa-solid fa-trash-can fa-lg" style="color: #a30000;"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
