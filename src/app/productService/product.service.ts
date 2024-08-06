@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl="http://localhost:8004"
+  baseUrl="https://product-management-server-o799.onrender.com"
 
   constructor(private http:HttpClient) { }
 
